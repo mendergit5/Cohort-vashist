@@ -4,10 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 
 // useEffect
+// useEffect( , ) - first argument what should be happend, second argument is dependecy array as when should happen like under which condition useEffect should execute 
 
 function App() {
 
   const [todos, setTodos] = useState([]);
+  
   useEffect(() => {
     setInterval(() => {
       fetch("https://sum-server.100xdevs.com/todos")

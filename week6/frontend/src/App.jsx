@@ -14,7 +14,7 @@ function App() {
       }}>Update the title</button>
       <Header title={title}></Header>
       <Header title="new text"></Header>
-    </div>>
+    </div>
   )
 }
 
