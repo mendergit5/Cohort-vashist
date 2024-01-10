@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HTML 5 Boilerplate</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+
+    <script>
+        function populateDiv(){
+            const firstnum = document.getElementById("firstnumber").value;
+            const secondnum = document.getElementById("secondnumber").value;
+            var result = document.getElementById("finalsum");
+            result.innerHTML=parseInt(firstnum)+parseInt(secondnum);
+        }
+    </script>
+    <!-- <form action="/action_page.php"> -->
+        <input id="firstnumber" type="text" placeholder="First number"><br><br>
+        <!-- <label for="lname">Last name:</label> -->
+        <input id="secondnumber" type="text" placeholder="Second number"><br><br>
+        <button onclick="populateDiv()">Calculate Sum</button><br><br>
+        <div id="finalsum"></div>
+      <!-- </form> -->
+  </body>
+</html>
+

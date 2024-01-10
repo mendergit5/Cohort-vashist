@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Seekbar Preview</title>
+    <style>
+        #seekbar {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            background-color: #ddd;
+            cursor: pointer;
+        }
+
+        .thumbnail {
+            position: absolute;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="seekbar" onclick="seekVideo(event)">
+        <!-- Thumbnails will be dynamically added here -->
+    </div>
+
+    <video id="video" width="600" controls>
+        <source src="your_video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
+    <script>
+        const video = document.getElementById('video');
+        const seekbar = document.getElementById('seekbar');
+
+        // Sample: Generate thumbnails every 5 seconds
+        const thumbnailInterval = 5; // in seconds
+        const numThumbnails = Math.floor(video.duration / thumbnailInterval);
+
+        for (let i = 0; i < numThumbnails; i++) {
+            const thumbnail = document.createElement('div');
+            thumbnail.className = 'thumbnail';
+            thumbnail.style.left = `${(i / numThumbnails) * 100}%`;
+            thumbnail.style.width = `${100 / numThumbnails}%`;
+
+            // Set background image for each thumbnail
+            thumbnail.style.backgroundImage = `url('capture_frame.php?time=${i * thumbnailInterval}')`;
+
+            seekbar.appendChild(thumbnail);
+        }
+
+        function seekVideo(event) {
+            const seekbarRect = seekbar.getBoundingClientRect();
+            const seekbarWidth = seekbarRect.width;
+            const clickX = event.clientX - seekbarRect.left;
+
+            // Calculate the percentage of the seekbar where the user clicked
+            const percentage = (clickX / seekbarWidth) * 100;
+
+            // Update the video playback position
+            video.currentTime = (percentage / 100) * video.duration;
+        }
+
+        // Update the seekbar and thumbnails as the video plays
+        video.addEventListener('timeupdate', () => {
+            const currentTime = video.currentTime;
+            const percentage = (currentTime / video.duration) * 100;
+
+            // Highlight the current position on the seekbar
+            seekbar.style.background = `linear-gradient(to right, #ccc ${percentage}%, transparent ${percentage}%)`;
+
+            // Show the corresponding thumbnail
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            thumbnails.forEach(thumbnail => {
+                const thumbnailStart = parseFloat(thumbnail.style.left);
+                const thumbnailEnd = thumbnailStart + (100 / numThumbnails);
+
+                if (percentage >= thumbnailStart && percentage < thumbnailEnd) {
+                    thumbnail.style.display = 'block';
+                } else {
+                    thumbnail.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
