@@ -21,7 +21,7 @@ export function Assignment1() {
             <CounterButtons onIncrement={handleIncrement} onDecrement={handleDecrement} />
         </div>
     );
-};
+}
 
 const CounterButtons = ({ onIncrement, onDecrement }) => (
     <div>
@@ -29,3 +29,4 @@ const CounterButtons = ({ onIncrement, onDecrement }) => (
         <button onClick={onDecrement}>Decrement</button>
     </div>
 );
+
