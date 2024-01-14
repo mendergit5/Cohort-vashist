@@ -9,8 +9,8 @@ function App() {
     <>
     <BrowserRouter>
     <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/cards" element={<CardList/>} />
+        <Route path="/" element={<CardList />} />
+        {/* <Route path="/cards" element={<CardList/>} /> */}
     </Routes>
     </BrowserRouter>
     </>
