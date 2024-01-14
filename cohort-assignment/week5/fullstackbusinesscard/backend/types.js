@@ -7,15 +7,16 @@ const createCard = zod.object({
     subheadingDesc1: zod.string(),  // subheading
     subheadingDesc2: zod.string(),  // subheading
     subheadingDesc3: zod.string(),  // subheading
-    linkedinURL: zod.string(), // linkedin button url
-    twitterURL: zod.string(), // twitter button url
+    linkedinURL: zod.string().optional(), // linkedin button url
+    twitterURL: zod.string().optional(), // twitter button url
 })
 
-// const updateTodo = zod.object({
-//     id: zod.string(),
-// })
+const updateCard = zod.object({
+    twitterURL: zod.string(),
+  });
 
 
 module.exports = {
     createCard: createCard,
+    updateCard: updateCard,
 }

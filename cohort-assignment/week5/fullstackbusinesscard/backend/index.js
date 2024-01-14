@@ -1,7 +1,7 @@
 // write basic express boilerplate code
 // with express.json() middleware
 const express = require("express");
-const { createCard } = require("./types");
+const { createCard, updateCard } = require("./types");
 const { card } = require("./db");
 const app = express();
 const cors = require("cors");
@@ -58,7 +58,8 @@ app.get("/cards", async function (req, res) {
 //  from the URL and makes it available as req.params.id in the route handler.
 app.delete("/card/:id", async function (req, res) {
   try {
-    const removedCard = await card.findByIdAndRemove(req.params.id);
+    const removedCard = await card.findOneAndDelete({ _id: req.params.id });
+    console.log(removedCard);
     if (removedCard) {
       res.json({
         msg: "Card Removed",
@@ -69,6 +70,7 @@ app.delete("/card/:id", async function (req, res) {
       });
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({
       error: "Internal Server Error",
     });
@@ -76,11 +78,11 @@ app.delete("/card/:id", async function (req, res) {
 });
 
 // Update card
-app.put("/card/:_id", async function (req, res) {
+app.patch("/card/:_id", async function (req, res) {
   try {
     const updatePayload = req.body;
     console.log(updatePayload);
-    const parsePayload = createCard.safeParse(updatePayload);
+    const parsePayload = updateCard.safeParse(updatePayload);
     console.log(parsePayload);
     if (!parsePayload.success) {
       res.status(411).json({
