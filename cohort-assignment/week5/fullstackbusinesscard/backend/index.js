@@ -126,3 +126,5 @@ app.patch("/card/:_id", async function (req, res) {
 
 
 app.listen(3000);
+
+module.exports = app
