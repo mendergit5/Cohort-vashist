@@ -63,12 +63,17 @@ function TextComponent({ className, children }) {
 }
 
 function ButtonComponent({ className, children, url }) {
+
+  if(!url || url.trim() === '')
+    return null;
+
   return(
   <a href={url}> 
-  <button className={className}>
-    {children}
-  </button>
-  </a>)
+    <button className={className}>
+      {children}
+    </button>
+  </a>
+  )
 }
 
 
