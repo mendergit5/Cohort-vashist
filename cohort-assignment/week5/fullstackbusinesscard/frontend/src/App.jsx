@@ -16,11 +16,11 @@ function App() {
     </>
   )
 }
-function Home(){
-  return<div>
-    Hello
-  </div>
-}
+// function Home(){
+//   return<div>
+//     Hello
+//   </div>
+// }
 
 export default App
 
