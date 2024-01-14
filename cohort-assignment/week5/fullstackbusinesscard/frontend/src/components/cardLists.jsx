@@ -7,7 +7,7 @@ function CardList() {
 
   useEffect(() => {
     // Fetch data from the backend API
-    fetch('http://localhost:3000/cards')
+    fetch('https://cohort-vashist-backend.vercel.app/cards/')
       .then(response => response.json())
       .then(data => {
         setCards(data.cards); // Assuming the backend returns an array of card data
